@@ -18,7 +18,7 @@ import { WeatherService } from './Services/weather.service';
   imports: [
     BrowserModule,
     HttpClientModule
-  ],
+  ], 
   providers: [
     WeatherService
   ],

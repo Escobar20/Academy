@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHandler, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, pipe } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
 import { map } from 'rxjs/operators';
@@ -19,23 +19,26 @@ export class WeatherService {
 
      }
 
-    getTime2(): Observable<any> {
+    getForecast(): Observable<any> {
       return this._http.get<Array<any>>('https://api.openweathermap.org/data/2.5/forecast', { params : this.Params})
         .pipe(
           map( data => {
               if (this.checkIfListExcist(data.list)) {
-                data.list = data.list.map(dataa => {
-                  dataa.main.tempC = dataa.main.temp - 273.15;
-                  dataa.main.temp_maxC = dataa.main.temp_max - 273.15;
-                  dataa.main.temp_minC = dataa.main.temp_min - 273.15;
-                  return dataa;
+                data.list = data.list.map(value => {
+                  value.main.tempC = value.main.temp - 273.15;
+                  value.main.temp_maxC = value.main.temp_max - 273.15;
+                  value.main.temp_minC = value.main.temp_min - 273.15;
+                  return value;
                 });
               }
-              console.log(data.list);
               return data;
           })
         );
     } // End Observable
+
+    getLocationWeather(): Observable<any>{
+      return this._http.get<Array<any>>('https://api.openweathermap.org/data/2.5/weather', { params : this.Params});
+    }
 
     public handleError(err: HttpErrorResponse) {
       console.log(err.message);
