@@ -10,10 +10,17 @@ export class WeatherService {
 
     readonly KEYWeather = '52014a5500cde66578177e9913b53a89';  // propiedad de clases
     public cityName = 'Monterrey,MX';
+    public cityIDS = '3995465,4005539,4024597,3996063,5128638,3925227,3609673,7871777';
+    public metric = 'metric'; //metric - imperial                                             // Esto deberia ser variable para convertir C - F
     public atributos;
     readonly Params: HttpParams = new HttpParams()
       .set('APPID', this.KEYWeather)
       .set('q', this.cityName);
+
+    readonly ParamsId: HttpParams = new HttpParams()
+    .set('APPID', this.KEYWeather)
+    .set('id', this.cityIDS)
+    .set('units', this.metric);
 
      constructor( private _http: HttpClient) {
 
@@ -37,7 +44,7 @@ export class WeatherService {
     } // End Observable
 
     getLocationWeather(): Observable<any>{
-      return this._http.get<Array<any>>('https://api.openweathermap.org/data/2.5/weather', { params : this.Params});
+      return this._http.get<Array<any>>('https://api.openweathermap.org/data/2.5/group', { params : this.ParamsId});
     }
 
     public handleError(err: HttpErrorResponse) {
@@ -48,5 +55,10 @@ export class WeatherService {
     private checkIfListExcist(Lista): boolean {
       return Lista;
     }
+
+    searchLocationWeather(city): Observable<any> {
+      return this._http.get('http://api.openweathermap.org/data/2.5/find?q=${city}&APPID=${KEYWeather}')
+    }
+
 
 }
