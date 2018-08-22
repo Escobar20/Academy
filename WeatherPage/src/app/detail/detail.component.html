@@ -1,1 +1,7 @@
 <app-nav-bar></app-nav-bar>
+<div *ngFor='let Dia of weather.Details'>
+  <h1>{{Dia.Dia}}</h1>
+  <div *ngFor='let Hora of Dia.Horas'>
+    <h6>Hora: {{Hora.hora}} temperatura: {{Hora.temp}} Maxima: {{Hora.temp_max}} Minima: {{Hora.temp_min}} </h6>
+  </div>
+</div>
