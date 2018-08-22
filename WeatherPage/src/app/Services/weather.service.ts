@@ -14,10 +14,7 @@ export class WeatherService {
     public metric = 'metric'; // metric - imperial
     // Esto deberia ser variable para convertir C - F
     public atributos;
-
-    readonly Params: HttpParams = new HttpParams()
-    .set('APPID', this.KEYWeather)
-    .set('q', this.cityName);
+    public Details;
 
     readonly ParamsId: HttpParams = new HttpParams()
     .set('APPID', this.KEYWeather)
@@ -27,22 +24,17 @@ export class WeatherService {
 
      }
 
-    getForecast(): Observable<any> {
-      return this._http.get<Array<any>>('https://api.openweathermap.org/data/2.5/forecast', { params : this.Params})
+    getForecast(city): Observable<any> {
+      const Params: HttpParams = new HttpParams()
+      .set('APPID', this.KEYWeather)
+      .set('q', city);
+      return this._http.get<Array<any>>('https://api.openweathermap.org/data/2.5/forecast', { params : Params})
         .pipe(
           map( data => {
-              // if (this.checkIfListExcist(data.list)) {
-              //   data.list = data.list.map(value => {
-              //     value.main.tempC = value.main.temp - 273.15;
-              //     value.main.temp_maxC = value.main.temp_max - 273.15;
-              //     value.main.temp_minC = value.main.temp_min - 273.15;
-              //     return value;
-              //   });
-              // }
               return data;
           })
         );
-    } // End Observable
+    }
 
     getLocationWeather(): Observable<any> {
       return this._http.get<Array<any>>('https://api.openweathermap.org/data/2.5/group', { params : this.ParamsId});
@@ -62,10 +54,6 @@ export class WeatherService {
 
     private checkIfListExcist(Lista): boolean {
       return Lista;
-    }
-
-    searchLocationWeather(city): Observable<any> {
-      return this._http.get('http://api.openweathermap.org/data/2.5/find?q=${city}&APPID=${KEYWeather}')
     }
 
 

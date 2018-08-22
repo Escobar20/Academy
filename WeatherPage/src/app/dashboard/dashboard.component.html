@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
   <app-nav-bar></app-nav-bar>
   <br>
@@ -30,6 +31,32 @@
       
     </div>
     <div *ngIf="!DataCity"> Loading...</div>
+=======
+<app-nav-bar></app-nav-bar>
+  <div *ngIf="DataCity">
+
+      <div *ngFor="let city of DataCity">
+
+        <div class="row card" style="width: 18rem;">
+
+          <span align = "middle">
+            <img *ngIf="city.weather[0].main==='Clouds'" src='assets/Images/cloudy.png'>
+            <img *ngIf="city.weather[0].main==='Clear'" src='assets/Images/partly_cloudy.png'>
+            <img *ngIf="city.weather[0].main==='Haze'" src='assets/Images/sunny.png'>
+            <img *ngIf="city.weather[0].main==='Fog'" src='assets/Images/snow.png'>
+          </span>
+          <div class="card-body">
+            <h5 class="card-title"> {{ city.name }} </h5>
+            <p class="card-text"> Current temp(F) : {{ city.main.temp }} </p>
+            <p class="card-text"> Current temp(C) : {{ (city.main.temp  - 275.15 ).toFixed(2)  }} </p>
+            <p class="card-text"> Main: {{ city.weather[0].main}}  </p>
+            <p class="card-text"> Description: {{ city.weather[0].description}}</p>
+            <a href="#" class="btn btn-primary"  [routerLink]="['/detail', city.name]" >Details</a>
+          </div>
+        </div>
+      </div>
+
+>>>>>>> c134b5f21253d752bf07f2dba1e422b60d6b7c5e
   </div>
 </div>
 
