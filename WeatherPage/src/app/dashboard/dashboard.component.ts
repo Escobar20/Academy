@@ -12,23 +12,23 @@ export class DashboardComponent implements OnInit {
   private atributos;
   public DataCity = [];
 
-  constructor(private weather: WeatherService) {
+  constructor(public weather: WeatherService) {
 
    }
 
   ngOnInit() {
-    if (!this.weather.atributos){
+    if (!this.weather.atributos) {
       this.weather.getLocationWeather().subscribe(
-            (data) => { 
+            (data) => {
                         console.log ("la data", data);
                         this.DataCity = data.list;
-                       //this.weather.atributos = data; this.atributos = data;
+                        this.weather.atributos = this.DataCity;
               },
             (error) => console.log(error)
 
           );
-   }else{
-     this.atributos = this.weather.atributos;
+   } else {
+      this.DataCity = this.weather.atributos;
    }
 
   }
@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
   //   return temp / 2;
   // }
 
-  
+
 
 
 

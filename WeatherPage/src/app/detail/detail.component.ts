@@ -15,7 +15,7 @@ export class DetailComponent implements OnInit {
     if (!this.weather.atributos) {
       this.weather.getForecast().subscribe(
         (data) => {
-                  this.weather.atributos = data;
+                  // this.weather.atributos = data;
                   this.atributos = data;
                   console.log(data);
                 },
