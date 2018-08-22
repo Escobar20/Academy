@@ -33,17 +33,6 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  setImage(image): string{
-      switch (image){
-        case 'Cloudy': { return 'assets/Images/cloudy.png'; }
-        case 'Clear': { return 'assets/Images/sunny.png'; }
-      }
-  }
-
-  // getCelsius(temp){
-  //   return temp / 2;
-  // }
-
 
 
 
