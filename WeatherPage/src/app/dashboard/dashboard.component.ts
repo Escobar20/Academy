@@ -33,9 +33,10 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  // getCelsius(temp){
-  //   return temp / 2;
-  // }
+
+  getInfo(city) {
+
+}
 
 
 

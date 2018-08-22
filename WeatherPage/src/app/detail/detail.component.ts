@@ -12,19 +12,14 @@ export class DetailComponent implements OnInit {
   constructor(private weather: WeatherService) { }
 
   ngOnInit() {
-    if (!this.weather.atributos) {
-      this.weather.getForecast().subscribe(
-        (data) => {
-                  // this.weather.atributos = data;
-                  this.atributos = data;
-                  console.log(data);
-                },
-        (err) => {
-          this.weather.handleError(err);
-      });
-    } else {
-      this.atributos = this.weather.atributos;
-    }
+    this.weather.getForecast(city).subscribe(
+      (data) => {
+                this.weather.Details = data;
+                console.log(this.weather.Details);
+              },
+      (err) => {
+        this.weather.handleError(err);
+    });
   }
 
 }

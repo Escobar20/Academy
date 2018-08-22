@@ -1,7 +1,3 @@
-<p>
-  dashboard works!
-</p>
-
   <div *ngIf="DataCity">
     <ul>
       <li *ngFor="let city of DataCity">
@@ -13,7 +9,7 @@
             <p class="card-text"> Current temp: {{ city.main.temp }} </p>
             <p class="card-text"> Current temp:  </p>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary" >Go somewhere</a>
+            <a href="#" class="btn btn-primary" (click)='getInfo(city.name)'>Go somewhere</a>
           </div>
         </div>
 
