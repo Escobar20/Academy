@@ -1,24 +1,27 @@
-<p>
-  dashboard works!
-</p>
-
+<app-nav-bar></app-nav-bar>
   <div *ngIf="DataCity">
-    <ul>
-      <li *ngFor="let city of DataCity">
+    
+      <div *ngFor="let city of DataCity">
 
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="assets/Images/cloudy.png" alt="Card image cap">
+        <div class="row card" style="width: 18rem;">
+
+          <span align = "middle">
+            <img *ngIf="city.weather[0].main==='Clouds'" src='assets/Images/cloudy.png'>
+            <img *ngIf="city.weather[0].main==='Clear'" src='assets/Images/partly_cloudy.png'>
+            <img *ngIf="city.weather[0].main==='Haze'" src='assets/Images/sunny.png'>
+            <img *ngIf="city.weather[0].main==='Fog'" src='assets/Images/snow.png'>
+          </span>
           <div class="card-body">
             <h5 class="card-title"> {{ city.name }} </h5>
-            <p class="card-text"> Current temp: {{ city.main.temp }} </p>
-            <p class="card-text"> Current temp:  </p>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="btn btn-primary" >Go somewhere</a>
+            <p class="card-text"> Current temp(F) : {{ city.main.temp }} </p>
+            <p class="card-text"> Current temp(C) : {{ (city.main.temp  - 275.15 ).toFixed(2)  }} </p>
+            <p class="card-text"> Main: {{ city.weather[0].main}}  </p>
+            <p class="card-text"> Description: {{ city.weather[0].description}}</p>
+            <a href="#" class="btn btn-primary" >Details</a>
           </div>
         </div>
-
-      </li>
-    </ul>
+      </div>
+    
   </div>
 
   <div *ngIf="!DataCity"> Loading...</div>
