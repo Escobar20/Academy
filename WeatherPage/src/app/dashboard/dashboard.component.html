@@ -1,6 +1,6 @@
 <app-nav-bar></app-nav-bar>
   <div *ngIf="DataCity">
-    
+
       <div *ngFor="let city of DataCity">
 
         <div class="row card" style="width: 18rem;">
@@ -17,11 +17,11 @@
             <p class="card-text"> Current temp(C) : {{ (city.main.temp  - 275.15 ).toFixed(2)  }} </p>
             <p class="card-text"> Main: {{ city.weather[0].main}}  </p>
             <p class="card-text"> Description: {{ city.weather[0].description}}</p>
-            <a href="#" class="btn btn-primary" >Details</a>
+            <a href="#" class="btn btn-primary"  [routerLink]="['/detail', city.name]" >Details</a>
           </div>
         </div>
       </div>
-    
+
   </div>
 
   <div *ngIf="!DataCity"> Loading...</div>

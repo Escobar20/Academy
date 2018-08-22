@@ -10,34 +10,24 @@ import { ActivatedRoute } from '@angular/router';
 export class DetailComponent implements OnInit {
   private atributos;
 
-  constructor(private weather: WeatherService,private route: ActivatedRoute) { 
-
-    // this.route.params.subscribe(res => {
-    //   let id;
-    //   id = res['id'];
-    //   console.log('id', id);
-
-    //   this._todosService.getTodo(id).subscribe( todo => {
-    //     this.todo = todo;
-    //   });
-    // });
-
+  constructor(private weather: WeatherService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    if (!this.weather.atributos) {
-      this.weather.getForecast().subscribe(
+    this.route.params.subscribe(res => {
+      let name;
+      name = res['name'];
+      console.log('name', name);
+
+      this.weather.getForecast(name).subscribe(
         (data) => {
-                  // this.weather.atributos = data;
-                  this.atributos = data;
-                  console.log(data);
+                  this.weather.Details = data;
+                  console.log(this.weather.Details);
                 },
         (err) => {
           this.weather.handleError(err);
       });
-    } else {
-      this.atributos = this.weather.atributos;
-    }
+    });
   }
 
 }
