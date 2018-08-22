@@ -32,15 +32,4 @@ export class DashboardComponent implements OnInit {
    }
 
   }
-
-
-  getInfo(city) {
-
-}
-
-
-
-
-
-
 }
