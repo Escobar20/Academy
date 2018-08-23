@@ -9,19 +9,29 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailComponent implements OnInit {
   private atributos;
+  public name;
+  public selectMetric;
 
   constructor(public weather: WeatherService, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
+
+    //----------------------------
+
+    this.weather.setMetrics$.subscribe( choose => {
+      this.selectMetric = choose;})
+
+//------------------------------
+
     this.route.params.subscribe(res => {
-      let name;
-      name = res['name'];
+      this.name = res['name'];
       console.log('name', name);
 
-      this.weather.getForecast(name).subscribe(
+      this.weather.getForecast(this.name).subscribe(
         (data) => {
                   this.weather.Details = data;
+                  console.log ('this.weather.Details',data);
                   this.weather.Details = this.weather.Details.list.map(
                     (Lista) => {
                       const fields = Lista.dt_txt.split(' ');
@@ -29,7 +39,10 @@ export class DetailComponent implements OnInit {
                       'hora': fields[1],
                       'temp': Lista.main.temp,
                        'temp_min': Lista.main.temp_min,
-                       'temp_max': Lista.main.temp_max};
+                       'temp_max': Lista.main.temp_max,
+                       'main': Lista.weather[0].main
+                      };
+                       
                     }
                   );
                   let days = this.weather.Details.map(
@@ -48,7 +61,8 @@ export class DetailComponent implements OnInit {
                             'hora': DiaActual.hora,
                              'temp': DiaActual.temp,
                             'temp_min': DiaActual.temp_min,
-                          'temp_max': DiaActual.temp_max});
+                          'temp_max': DiaActual.temp_max,
+                          'main': DiaActual.main })
                         }
                       }
                     );
