@@ -26,6 +26,8 @@ export class WeatherService {
     public setMetrics$: BehaviorSubject<number> = new BehaviorSubject(1); // 1 - F | 2 - C | 3 - B
     public setMessage$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
+    //public atributos$: BehaviorSubject<Array<any>> = new BehaviorSubject(['3995465,4005539,4024597,3996063,5128638,3925227,3609673,7871777']);  
+
     // ---------------------- LOCAL STORAGE 
 
 

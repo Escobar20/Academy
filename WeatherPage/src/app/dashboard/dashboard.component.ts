@@ -12,6 +12,7 @@ export class DashboardComponent implements OnInit {
   private atributos;
   public DataCity = [];
   public SaveDatas;
+  public Auxiliar = [];
 
   public selectMetric;
 
@@ -33,6 +34,10 @@ export class DashboardComponent implements OnInit {
       }
       )
 
+    //   this.weather.atributos$.subscribe( list => {
+    //   this.DataCity = list;
+    //  })
+    
     //------------------------------
 
     if (!this.weather.atributos) {
@@ -50,6 +55,21 @@ export class DashboardComponent implements OnInit {
     else {
       this.DataCity = this.weather.atributos;
    }
+
+  } // END onInit
+
+  deleteCity(city : String){
+    console.log("Delete", city);
+    console.log("Antes", this.weather.atributos);
+
+    this.weather.atributos.map(
+                (Lista) => {
+                  if (Lista.name != city ) { this.Auxiliar.push(Lista); }                
+                }
+              );
+   this.weather.atributos = this.Auxiliar;
+   localStorage.setItem('DataCities', JSON.stringify(this.weather.atributos));
+    console.log("nueva lista -> ",this.Auxiliar);
 
   }
 
