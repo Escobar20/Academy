@@ -14,11 +14,12 @@
                   <img *ngIf="city.weather[0].main==='Haze'" src='assets/Images/sunny.png'>
                   <img *ngIf="city.weather[0].main==='Fog'" src='assets/Images/snow.png'>
                   <img *ngIf="city.weather[0].main==='Rain'" src='assets/Images/rain.png'>
+                  <img *ngIf="city.weather[0].main==='Thunderstorm'" src='assets/Images/light.png'>
                 </span>
                 <div class="card-body">
                   <h5 class="card-title"> {{ city.name }} </h5>
-                  <p class="card-text"> Current temp(F) : {{ city.main.temp }} </p>
-                  <p class="card-text"> Current temp(C) : {{ (city.main.temp  - 275.15 ).toFixed(2)  }} </p>
+                  <p class="card-text" *ngIf= "selectMetric === 2 || selectMetric === 3 " > Current temp(F) : {{ city.main.temp }} </p>
+                  <p class="card-text" *ngIf= "selectMetric === 1 || selectMetric === 3 " > Current temp(C) : {{ (city.main.temp  - 275.15 ).toFixed(2)  }} </p>
                   <p class="card-text"> Main: {{ city.weather[0].main}}  </p>
                   <p class="card-text"> Description: {{ city.weather[0].description}}</p>
                   <a href="#" class="btn btn-primary" [routerLink]="['/detail', city.name ]" >Details</a>

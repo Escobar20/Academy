@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, pipe } from 'rxjs';
+import { Observable, pipe, BehaviorSubject } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
 import { map } from 'rxjs/operators';
 
@@ -19,6 +19,19 @@ export class WeatherService {
     readonly ParamsId: HttpParams = new HttpParams()
     .set('APPID', this.KEYWeather)
     .set('id', this.cityIDS);
+
+
+    //--------------------------------- Behaviour subject --------------------------------------
+
+    public setMetrics$: BehaviorSubject<number> = new BehaviorSubject(1); // 1 - F | 2 - C | 3 - B
+    public setMessage$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+    // ---------------------- LOCAL STORAGE 
+
+
+    //-----------------------------------------------------------------------------------------
+
+
 
      constructor( private _http: HttpClient) {
 

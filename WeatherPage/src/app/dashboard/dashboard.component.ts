@@ -11,23 +11,43 @@ import { WeatherService } from '../Services/weather.service';
 export class DashboardComponent implements OnInit {
   private atributos;
   public DataCity = [];
+  public SaveDatas;
+
+  public selectMetric;
 
   constructor(public weather: WeatherService) {
 
    }
 
   ngOnInit() {
+
+    this.SaveDatas  = localStorage.getItem('DataCities');
+    this.weather.atributos = JSON.parse(this.SaveDatas);
+    //this.DataCity = this.weather.atributos;
+    
+
+    //----------------------------
+
+      this.weather.setMetrics$.subscribe( choose => {
+          this.selectMetric = choose;
+      }
+      )
+
+    //------------------------------
+
     if (!this.weather.atributos) {
       this.weather.getLocationWeather().subscribe(
             (data) => {
                         console.log ("la data", data);
+                        localStorage.setItem('DataCities', JSON.stringify (data.list));
                         this.DataCity = data.list;
                         this.weather.atributos = this.DataCity;
               },
             (error) => console.log(error)
-
           );
-   } else {
+          
+   }
+    else {
       this.DataCity = this.weather.atributos;
    }
 
