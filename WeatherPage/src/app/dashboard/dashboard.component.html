@@ -1,23 +1,25 @@
 
   <app-nav-bar></app-nav-bar>
   <br>
+<div *ngIf="DataCity">
   <div class="album py-5 bg-light">
-    <div class="contenedor"> 
-    <div *ngIf="DataCity">
-        <div *ngFor="let city of DataCity">
-          <div class="row wrapper">
-            <div class="col-md-3">
-              <div class="card" style="width: 18rem;">
-                <span align = "middle">
-                  <img *ngIf="city.weather[0].main==='Clouds'" src='assets/Images/cloudy.png'>
-                  <img *ngIf="city.weather[0].main==='Clear'" src='assets/Images/partly_cloudy.png'>
-                  <img *ngIf="city.weather[0].main==='Haze'" src='assets/Images/sunny.png'>
-                  <img *ngIf="city.weather[0].main==='Fog'" src='assets/Images/snow.png'>
-                  <img *ngIf="city.weather[0].main==='Rain'" src='assets/Images/rain.png'>
-                  <img *ngIf="city.weather[0].main==='Thunderstorm'" src='assets/Images/light.png'>
-                </span>
-                <div class="card-body">
-                  <h5 class="card-title"> {{ city.name }} </h5>
+    <div class="container">   <!--contenedor-->
+      <div class="row ">   <!-- wrapper -->
+        <!-- <div *ngIf="DataCity"> -->
+          <div class="col-md-4 col-xl-3" *ngFor="let city of DataCity">
+
+            <div class="card mb-3" >
+              <span align = "middle">
+                <img *ngIf="city.weather[0].main==='Clouds'" src='assets/Images/cloudy.png'>
+                <img *ngIf="city.weather[0].main==='Clear'" src='assets/Images/partly_cloudy.png'>
+                <img *ngIf="city.weather[0].main==='Haze'" src='assets/Images/sunny.png'>
+                <img *ngIf="city.weather[0].main==='Fog'" src='assets/Images/snow.png'>
+                <img *ngIf="city.weather[0].main==='Rain'" src='assets/Images/rain.png'>
+                <img *ngIf="city.weather[0].main==='Thunderstorm'" src='assets/Images/light.png'>
+              </span>
+               
+              <div class="card-body">
+                <h5 class="card-title"> {{ city.name }} </h5>
                   <p class="card-text" *ngIf= "selectMetric === 2 || selectMetric === 3 " > Current temp(F) : {{ city.main.temp }} </p>
                   <p class="card-text" *ngIf= "selectMetric === 1 || selectMetric === 3 " > Current temp(C) : {{ (city.main.temp  - 275.15 ).toFixed(2)  }} </p>
                   <p class="card-text"> Main: {{ city.weather[0].main}}  </p>
@@ -26,16 +28,16 @@
                     <a href="#" class="btn btn-primary" [routerLink]="['/detail', city.name ]" >Details</a>
                     <a href="#" class="btn btn-warning" (click)="deleteCity(city.name)" >Delete</a>
                   </p>
-                </div>
               </div>
             </div>
+
           </div>
-        </div>
-      
+        <!-- </div> -->
+      </div>
     </div>
-    <div *ngIf="!DataCity"> Loading...</div>
   </div>
 </div>
+<div *ngIf="!DataCity"> Loading...</div>
 
 
 
