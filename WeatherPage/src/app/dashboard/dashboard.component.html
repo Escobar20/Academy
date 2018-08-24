@@ -22,7 +22,10 @@
                   <p class="card-text" *ngIf= "selectMetric === 1 || selectMetric === 3 " > Current temp(C) : {{ (city.main.temp  - 275.15 ).toFixed(2)  }} </p>
                   <p class="card-text"> Main: {{ city.weather[0].main}}  </p>
                   <p class="card-text"> Description: {{ city.weather[0].description}}</p>
-                  <a href="#" class="btn btn-primary" [routerLink]="['/detail', city.name ]" >Details</a>
+                  <p>
+                    <a href="#" class="btn btn-primary" [routerLink]="['/detail', city.name ]" >Details</a>
+                    <a href="#" class="btn btn-warning" (click)="deleteCity(city.name)" >Delete</a>
+                  </p>
                 </div>
               </div>
             </div>

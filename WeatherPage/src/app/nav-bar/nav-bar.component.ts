@@ -11,6 +11,7 @@ export class NavBarComponent implements OnInit {
   public DataCity;
   public inputText;
   public setMetricsButton = true;
+  public isExist;
 
   public MessageOn;
 
@@ -39,15 +40,30 @@ export class NavBarComponent implements OnInit {
   findLocation() {
     this.weather.setMessage$.next(false);
     console.log(this.inputText);
-    if (this.inputText!= null){
+    this.isExist = false;
+
+    this.weather.atributos.map(
+                (Lista) => {
+                  console.log(Lista.name);
+                  if (Lista.name === this.inputText ) {this.isExist = true;}                 
+                }
+              );
+        
+    if (this.inputText!= null && !this.isExist){
                 this.weather.getOneLocationWeather(this.inputText).subscribe((info) => {
                   console.log(info);
+
                   this.weather.atributos.push(info);
+   //               this.weather.atributos$.next(this.weather.atributos); //BehaviourSubject
                   localStorage.setItem('DataCities', JSON.stringify(this.weather.atributos));
-                  console.log(this.weather.atributos);
+                  console.log("this.weather.atributos",this.weather.atributos);
                 }, (err) => {console.log('No hay ciudad con ese nombre'); this.weather.setMessage$.next(true); });
               
       }
+  }
+
+  ClearStorage(){
+    localStorage.clear();
   }
 
 }

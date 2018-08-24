@@ -7,7 +7,7 @@
         <div *ngFor="let Dia of weather.Details">
           
             <div class="row">
-              <h2> &nbsp;&nbsp; Date: {{Dia.Dia}} </h2>                    
+              <h2> &nbsp;&nbsp; {{Dia.Dia | date : "EEEE, MMMM d" }} </h2>                    
 
                 <div *ngFor='let Hora of Dia.Horas'>
                     <br><br>
