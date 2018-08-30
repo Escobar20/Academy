@@ -39,6 +39,7 @@ export class NavBarComponent implements OnInit {
 
   findLocation() {
     this.weather.setMessage$.next(false);
+    
     console.log(this.inputText);
     this.isExist = false;
 
