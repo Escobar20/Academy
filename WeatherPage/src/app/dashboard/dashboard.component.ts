@@ -43,9 +43,20 @@ export class DashboardComponent implements OnInit {
     if (!this.weather.atributos) {
       this.weather.getLocationWeather().subscribe(
             (data) => {
-                        console.log ("la data", data);
                         localStorage.setItem('DataCities', JSON.stringify (data.list));
-                        this.DataCity = data.list;
+                        
+                        // data.list.map( res =>{
+                        //   switch(res.weather[0].main){
+                        //     case 'Clouds': {res.weather[0].main = 'assets/Images/cloudy.png'; break;}
+                        //     case 'Clear':{ res.weather[0].main = 'assets/Images/partly_cloudy.png'; break;}
+                        //     case 'Haze':{ res.weather[0].main = 'assets/Images/sunny.png'; break;}
+                        //     case 'Fog':{ res.weather[0].main = 'assets/Images/snow.png'; break;}
+                        //     case 'Rain':{ res.weather[0].main = 'assets/Images/rain.png'; break;}
+                        //     case 'Thunderstorm':{ res.weather[0].main = 'assets/Images/light.png'; break;}
+                        //   }
+                        // });
+                        
+                        this.DataCity = data.list;                      
                         this.weather.atributos = this.DataCity;
               },
             (error) => console.log(error)
@@ -58,16 +69,18 @@ export class DashboardComponent implements OnInit {
 
   } // END onInit
 
-  deleteCity(city : String){
-    console.log("Delete", city);
+  deleteCity(index : number){
     console.log("Antes", this.weather.atributos);
 
-    this.weather.atributos.map(
-                (Lista) => {
-                  if (Lista.name != city ) { this.Auxiliar.push(Lista); }                
-                }
-              );
-   this.weather.atributos = this.Auxiliar;
+  //   this.weather.atributos.map(
+  //               (Lista) => {
+  //                 if (Lista.name != city ) { this.Auxiliar.push(Lista); }                
+  //               }
+  //             );
+  //  this.weather.atributos = this.Auxiliar;
+
+   this.DataCity.splice(index, 1); // Delete elements by index
+   this.weather.atributos = this.DataCity;
    localStorage.setItem('DataCities', JSON.stringify(this.weather.atributos));
     console.log("nueva lista -> ",this.Auxiliar);
 

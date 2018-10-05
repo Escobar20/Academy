@@ -1,45 +1,49 @@
 <app-nav-bar></app-nav-bar>
-  <br>
-  <div class="album py-5 bg-light">
-    <div class="contenedor">
-      <h1 align = "middle" > Weather in {{name}} </h1> 
+<br>
+<div class="album py-5 bg-light">
+  <div class="contenedor">
+    <h1 align="middle"> Weather in {{name}} </h1>
     <div *ngIf="weather.Details">
-        <div *ngFor="let Dia of weather.Details">
-          
-            <div class="row">
-              <h2> &nbsp;&nbsp; {{Dia.Dia | date : "EEEE, MMMM d" }} </h2>                    
+      <div *ngFor="let Dia of weather.Details">
 
-                <div *ngFor='let Hora of Dia.Horas'>
-                    <br><br>
-                    <div class="left">
-                          <div class="col-md-3">
-                              <div class="card" style="width: 18rem;">
+        <div class="row">
+          <h2> &nbsp;&nbsp; {{Dia.Dia | date : "EEEE, MMMM d" }} </h2>
 
-                                <span align = "middle">
+          <div *ngFor='let Hora of Dia.Horas'>
+            <br><br>
+            <div class="left">
+              <div class="col-md-3">
+                <div class="card" style="width: 18rem;">
+
+                  <!-- <span align = "middle">
                                   <img *ngIf="Hora.main==='Clouds'" src='assets/Images/cloudy.png'>
                                   <img *ngIf="Hora.main==='Clear'" src='assets/Images/partly_cloudy.png'>
                                   <img *ngIf="Hora.main==='Haze'" src='assets/Images/sunny.png'>
                                   <img *ngIf="Hora.main==='Fog'" src='assets/Images/snow.png'>
                                   <img *ngIf="Hora.main==='Rain'" src='assets/Images/rain.png'>     
                                   <img *ngIf="Hora.main==='Thunderstorm'" src='assets/Images/light.png'>
-                                </span>
+                                </span> -->
 
-                                <div class="card-body">
-                                  <h5 class="card-title"> Hora : {{Hora.hora}} </h5>
-                                  <p class="card-text" *ngIf= "selectMetric === 2 || selectMetric === 3 "> Temp(F) : {{Hora.temp}} </p>
-                                  <p class="card-text" *ngIf= "selectMetric === 1 || selectMetric === 3 "> Temp(C) : {{ (Hora.temp  - 275.15 ).toFixed(2)  }} </p>
-                                  <p class="card-text"> Temp. Max.: {{Hora.temp_max}}  </p>
-                                  <p class="card-text"> Temp. Max.: {{Hora.temp_min}} </p>
-                                </div>
-                              </div>
-                          </div>
-                    </div>
+                  <span align="middle">
+                    <img src='assets/Images/{{Hora.main}}.png'>
+                  </span>
+
+                  <div class="card-body">
+                    <h5 class="card-title"> Hora : {{Hora.hora}} </h5>
+                    <p class="card-text" *ngIf="selectMetric === 2 || selectMetric === 3 "> Temp(F) : {{Hora.temp}} </p>
+                    <p class="card-text" *ngIf="selectMetric === 1 || selectMetric === 3 "> Temp(C) : {{ (Hora.temp -
+                      275.15 ).toFixed(2) }} </p>
+                    <p class="card-text"> Temp. Max.: {{Hora.temp_max}} </p>
+                    <p class="card-text"> Temp. Max.: {{Hora.temp_min}} </p>
+                  </div>
                 </div>
               </div>
+            </div>
           </div>
-      
+        </div>
+      </div>
+
     </div>
     <div *ngIf="!weather.Details"> Loading...</div>
   </div>
 </div>
-
