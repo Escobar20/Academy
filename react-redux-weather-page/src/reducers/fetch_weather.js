@@ -1,5 +1,6 @@
 // import merge from "lodash.merge";  merge([], state, action.payload[0]);
 import "babel-polyfill"; // Save TypeError: Array.includes is not a function [].includes
+import _ from "lodash"; //_.includes
 
 const fetchWeather = (
   state = {
@@ -44,16 +45,18 @@ const fetchWeather = (
       console.log("PAYLOAD", action.payload);
       console.log("STATE", state.weatherData);
 
-      var check = [state.cityIDs].includes(`${action.payload[0].id}`);
+      var array = JSON.parse("[" + state.cityIDs + "]"); // Convert String -> Array[Numbers]
+      var check = _.includes(array, action.payload[0].id);
+      //[state.cityIDs].includes(`${action.payload[0].id}`);
       console.log("ID's duplicate ?? ", check);
       console.log("ID's List -> ", state.cityIDs);
 
       var temp = state.weatherData.slice();
       temp.map(city => {
         if (
-          check &&
-          city.name === action.payload[0].name &&
-          city.sys.country === action.payload[0].sys.country
+          check ||
+          (city.name === action.payload[0].name &&
+            city.sys.country === action.payload[0].sys.country)
         ) {
           state = { ...state, isExist: true };
         }
@@ -82,6 +85,7 @@ const fetchWeather = (
     }
   }
   if (action.type === "DELETE_CITY") {
+    state = { ...state, isExist: false };
     //-----------------------------------------------------
     //LocalStorage
     const cachedHits = localStorage.getItem("IDsCities");

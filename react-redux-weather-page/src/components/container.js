@@ -26,9 +26,9 @@ class Container extends Component {
   constructor() {
     super();
     this.state = {
-      //cities: "3995465,4005539,4024597,3996063,5128638,3925227,3609673,7871777",
       banCelsius: true,
-      banFahren: false
+      banFahren: false,
+      banLocation: false
     };
   }
 
@@ -54,7 +54,13 @@ class Container extends Component {
   }
 
   addCity(city) {
-    this.props.FetchAPIResponseByName(city);
+    this.setState({ banLocation: false });
+    console.log(" >>>>>>>>>>>>>>>>> UBICATION ", this.props.location);
+    if (this.props.location.pathname === "/") {
+      this.props.FetchAPIResponseByName(city);
+    } else {
+      this.setState({ banLocation: true });
+    }
   }
 
   deleteCity(city, id) {
@@ -109,6 +115,12 @@ class Container extends Component {
         {this.props.apiResponseFetchError ? (
           <div className="alert alert-danger" role="alert">
             Don't have results - Check it out!
+          </div>
+        ) : null}
+
+        {this.state.banLocation ? (
+          <div className="alert alert-warning" role="alert">
+            Please return to the main page to add a city.
           </div>
         ) : null}
 
